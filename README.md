@@ -1,8 +1,8 @@
 **What is this ??**
 
-It is a full functionling Room Renting Website/Application from which we can book any types of hotel room, 
+It is a full functioning Room Renting Website/Application from which we can book any types of hotel room, 
 rent normal house/room/flat, resorts and other type of tourist places.
-It's a MERN Stack based wesbite in which MongoDB (Unstructured) database used for store data.
+It's a MERN Stack based website in which MongoDB (Unstructured) database used for store data.
 
 Download the zip file and install necessary npm depencies to run it.
 
