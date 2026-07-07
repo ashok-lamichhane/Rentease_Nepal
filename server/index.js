@@ -28,18 +28,36 @@ app.use("/properties", listingRoutes);
 app.use("/bookings", bookingRoutes);
 app.use("/users", userRoutes);
 
-app.get("/health", (_req, res) => {
-  res.status(200).json({ status: "ok" });
+app.get("/health", async (_req, res) => {
+  const databaseState = mongoose.connection.readyState;
+  const databaseStatus =
+    databaseState === 1 ? "connected" : "disconnected";
+
+  res.status(databaseState === 1 ? 200 : 503).json({
+    status: databaseState === 1 ? "ok" : "error",
+    database: databaseStatus,
+  });
 });
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 3001;
+const DB_NAME = process.env.MONGO_DB_NAME || "rentease_nepal";
+
+if (!process.env.MONGO_URL) {
+  console.error("MONGO_URL is not set. Add it to server/.env or Render environment variables.");
+  process.exit(1);
+}
 
 mongoose
   .connect(process.env.MONGO_URL, {
-    dbName: "aadarshmishra70",
+    dbName: DB_NAME,
   })
   .then(() => {
+    console.log(`MongoDB connected: ${DB_NAME}`);
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
   })
-  .catch((err) => console.log(`${err} did not connect`));
+  .catch((err) => {
+    console.error("MongoDB connection failed:", err.message);
+    console.error("Check MONGO_URL, database user password, and Atlas Network Access (0.0.0.0/0).");
+    process.exit(1);
+  });

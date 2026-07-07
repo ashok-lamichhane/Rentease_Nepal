@@ -34,6 +34,7 @@ Rentease_Nepal/
 │   ├── models/
 │   └── .env.example
 ├── docs/
+│   ├── MONGODB_SETUP_GUIDE.md # Create & host MongoDB Atlas (free)
 │   ├── DEPLOYMENT_GUIDE.md    # Vercel + Render hosting guide
 │   └── PLATFORM_USER_GUIDE.md # Full user & feature documentation
 └── render.yaml      # Render backend deployment config
@@ -61,10 +62,11 @@ npm start              # http://localhost:3000
 |---------|----------|-------|
 | Frontend | Vercel | [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md#step-3-deploy-frontend-on-vercel-free) |
 | Backend | Render | [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md#step-2-deploy-backend-on-render-free) |
-| Database | MongoDB Atlas | [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md#step-1-mongodb-atlas-setup) |
+| Database | MongoDB Atlas | [MongoDB Setup Guide](./docs/MONGODB_SETUP_GUIDE.md) |
 
 ## Documentation
 
+- **[MongoDB Setup Guide](./docs/MONGODB_SETUP_GUIDE.md)** — Create and host a free MongoDB Atlas database (step-by-step)
 - **[Deployment Guide](./docs/DEPLOYMENT_GUIDE.md)** — Step-by-step Vercel + Render hosting (free tier)
 - **[Platform User Guide](./docs/PLATFORM_USER_GUIDE.md)** — Features, user roles, booking flow, and navigation
 

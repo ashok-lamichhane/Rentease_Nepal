@@ -52,16 +52,41 @@ This guide walks you through deploying **RentEase Nepal** for free using:
 
 ## Step 1: MongoDB Atlas Setup
 
-1. Log in to [MongoDB Atlas](https://cloud.mongodb.com)
-2. Create a **free M0 cluster** (if you don't have one)
-3. Go to **Database Access** → Add a database user with password
-4. Go to **Network Access** → Add IP Address → **Allow Access from Anywhere** (`0.0.0.0/0`)
-5. Go to **Database** → Click **Connect** → Choose **Drivers**
-6. Copy your connection string:
-   ```
-   mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
-   ```
-7. Replace `<username>` and `<password>` with your credentials
+> **If your old MongoDB is not working**, follow the full guide: **[MONGODB_SETUP_GUIDE.md](./MONGODB_SETUP_GUIDE.md)**
+
+That guide covers creating a new free Atlas account, cluster, database user, network access, connection string, and testing — step by step with screenshots-style instructions.
+
+### Quick summary
+
+1. Create account at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
+2. Create a **free M0 cluster**
+3. Create a **database user** (save username and password)
+4. **Network Access** → Allow `0.0.0.0/0` (required for Render)
+5. Copy connection string and set database name to `rentease_nepal`:
+
+```
+mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/rentease_nepal?retryWrites=true&w=majority
+```
+
+6. Add to `server/.env` (local) and Render Environment (production):
+
+```env
+MONGO_URL=mongodb+srv://...
+MONGO_DB_NAME=rentease_nepal
+```
+
+7. Test: run `npm run dev` in `server/` — you should see `MongoDB connected: rentease_nepal`
+
+### Common fix for broken old database
+
+If the previous cluster (`aadarshmishra70`) was deleted or credentials expired:
+
+1. Create a **new cluster** in Atlas (do not reuse the old connection string)
+2. Create a **new database user** with a new password
+3. Update `MONGO_URL` in both local `.env` and Render
+4. Redeploy the Render backend
+
+See [MONGODB_SETUP_GUIDE.md](./MONGODB_SETUP_GUIDE.md) for detailed troubleshooting.
 
 ---
 
@@ -79,6 +104,7 @@ This guide walks you through deploying **RentEase Nepal** for free using:
    | Variable | Value |
    |----------|-------|
    | `MONGO_URL` | Your MongoDB Atlas connection string |
+   | `MONGO_DB_NAME` | `rentease_nepal` |
    | `JWT_SECRET` | A long random string (e.g. generate with `openssl rand -hex 32`) |
    | `GOOGLE_CLIENT_ID` | Your Google OAuth client ID |
    | `GOOGLE_CLIENT_SECRET` | Your Google OAuth client secret |
@@ -195,7 +221,8 @@ REACT_APP_GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
 ### Backend (`server/.env`)
 
 ```env
-MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net/dbname
+MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net/rentease_nepal?retryWrites=true&w=majority
+MONGO_DB_NAME=rentease_nepal
 JWT_SECRET=your-secure-random-secret
 GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-client-secret
@@ -244,6 +271,15 @@ npm start
 ---
 
 ## Troubleshooting
+
+### MongoDB connection fails
+
+- Follow [MONGODB_SETUP_GUIDE.md](./MONGODB_SETUP_GUIDE.md) to create a new database
+- Ensure `MONGO_URL` has the correct username, password, and cluster hostname
+- URL-encode special characters in passwords (`@` → `%40`, `#` → `%23`)
+- Atlas → Network Access must include `0.0.0.0/0`
+- Check Render logs for `MongoDB connection failed` messages
+- Visit `/health` — should show `"database": "connected"`
 
 ### GitHub security alert emails
 
@@ -317,7 +353,7 @@ Perfect for personal projects and portfolios.
 
 ## Quick Checklist
 
-- [ ] MongoDB Atlas cluster created and connection string ready
+- [ ] MongoDB Atlas cluster created — see [MongoDB Setup Guide](./docs/MONGODB_SETUP_GUIDE.md)
 - [ ] Backend deployed on Render with all env vars
 - [ ] Frontend deployed on Vercel with `REACT_APP_API_URL` set
 - [ ] `CLIENT_URL` on Render updated with Vercel URL
