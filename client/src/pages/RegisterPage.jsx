@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import "../styles/Register.scss";
 import toast from "react-hot-toast";
+import { getApiUrl } from "../config/api";
 import GoogleSignIn from "../components/GoogleSignIn";
 
 const RegisterPage = () => {
@@ -41,7 +42,7 @@ const RegisterPage = () => {
         register_form.append(key, formData[key])
       }
 
-      const response = await fetch("http://localhost:3001/auth/register", {
+      const response = await fetch(getApiUrl("/auth/register"), {
         method: "POST",
         body: register_form
       })

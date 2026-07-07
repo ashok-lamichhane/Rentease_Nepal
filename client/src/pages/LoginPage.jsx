@@ -3,7 +3,8 @@ import "../styles/Login.scss"
 import { setLogin } from "../redux/state";
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
+import { getApiUrl } from "../config/api";
 import GoogleSignIn from "../components/GoogleSignIn";
 
 const LoginPage = () => {
@@ -18,7 +19,7 @@ const LoginPage = () => {
     e.preventDefault()
 
     try {
-      const response = await fetch ("http://localhost:3001/auth/login", {
+      const response = await fetch(getApiUrl("/auth/login"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

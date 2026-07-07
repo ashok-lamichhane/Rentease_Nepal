@@ -1,26 +1,73 @@
-**What is this ??**
+# RentEase Nepal
 
-It is a full functioning Room Renting Website/Application from which we can book any types of hotel room, 
-rent normal house/room/flat, resorts and other type of tourist places.
-It's a MERN Stack based website in which MongoDB (Unstructured) database used for store data.
+A full-stack room and property rental platform (MERN stack) for booking hotels, rooms, flats, resorts, and tourist accommodations in Nepal.
 
-Download the zip file and install necessary npm depencies to run it.
+## Features
 
-In the project directory, you can run:
+- User registration and login (email/password + Google OAuth)
+- Browse and search property listings by category
+- Create and manage property listings (host)
+- Book properties with date selection and price calculation
+- Wish list, trip list, and reservation management
+- Photo uploads for profiles and listings
 
-**npm start**
+## Tech Stack
 
-Runs the app in the development mode.
-Open http://localhost:3000 to view it in your browser.
+| Layer | Technology |
+|-------|------------|
+| Frontend | React, Redux, Material UI, SCSS |
+| Backend | Node.js, Express |
+| Database | MongoDB (Mongoose) |
+| Auth | JWT, Google OAuth |
 
-The page will reload when you make changes.
-You may also see any lint errors in the console.
+## Project Structure
 
-npm test
+```
+Rentease_Nepal/
+├── client/          # React frontend
+│   ├── src/
+│   ├── public/
+│   ├── vercel.json  # Vercel deployment config
+│   └── .env.example
+├── server/          # Express backend API
+│   ├── routes/
+│   ├── models/
+│   └── .env.example
+├── docs/
+│   ├── DEPLOYMENT_GUIDE.md    # Vercel + Render hosting guide
+│   └── PLATFORM_USER_GUIDE.md # Full user & feature documentation
+└── render.yaml      # Render backend deployment config
+```
 
-Launches the test runner in the interactive watch mode.
+## Quick Start (Local)
 
-npm run build
+```bash
+# Backend
+cd server
+npm install
+cp .env.example .env   # Add your MongoDB URL, JWT secret, etc.
+npm run dev            # http://localhost:3001
 
-Builds the app for production to the build folder.
+# Frontend (new terminal)
+cd client
+npm install
+cp .env.example .env   # REACT_APP_API_URL=http://localhost:3001
+npm start              # http://localhost:3000
+```
 
+## Deploy for Free
+
+| Service | Platform | Guide |
+|---------|----------|-------|
+| Frontend | Vercel | [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md#step-3-deploy-frontend-on-vercel-free) |
+| Backend | Render | [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md#step-2-deploy-backend-on-render-free) |
+| Database | MongoDB Atlas | [Deployment Guide](./docs/DEPLOYMENT_GUIDE.md#step-1-mongodb-atlas-setup) |
+
+## Documentation
+
+- **[Deployment Guide](./docs/DEPLOYMENT_GUIDE.md)** — Step-by-step Vercel + Render hosting (free tier)
+- **[Platform User Guide](./docs/PLATFORM_USER_GUIDE.md)** — Features, user roles, booking flow, and navigation
+
+## Security
+
+Dependency vulnerabilities (`nth-check`, `postcss`) reported by GitHub Dependabot are fixed via npm overrides in `client/package.json`. Run `npm install` in the `client` folder after pulling updates.

@@ -10,6 +10,7 @@ import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
+import { getApiUrl, getAssetUrl } from "../config/api";
 
 const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
@@ -20,7 +21,7 @@ const ListingDetails = () => {
   const getListingDetails = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/properties/${listingId}`,
+        getApiUrl(`/properties/${listingId}`),
         {
           method: "GET",
         }
@@ -73,7 +74,7 @@ const ListingDetails = () => {
         totalPrice: listing.price * dayCount,
       };
 
-      const response = await fetch("http://localhost:3001/bookings/create", {
+      const response = await fetch(getApiUrl("/bookings/create"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +113,7 @@ const ListingDetails = () => {
         <div className="photos">
           {listing.listingPhotoPaths?.map((item) => (
             <img
-              src={`http://localhost:3001/${item.replace("public", "")}`}
+              src={getAssetUrl(item)}
               alt="listing photo"
             />
           ))}
@@ -130,10 +131,7 @@ const ListingDetails = () => {
 
         <div className="profile">
           <img
-            src={`http://localhost:3001/${listing.creator.profileImagePath.replace(
-              "public",
-              ""
-            )}`}
+            src={getAssetUrl(listing.creator.profileImagePath)}
           />
           <h3>
             Hosted by {listing.creator.firstName} {listing.creator.lastName}
