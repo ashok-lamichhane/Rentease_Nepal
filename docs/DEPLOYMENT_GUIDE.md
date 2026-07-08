@@ -94,7 +94,9 @@ See [MONGODB_SETUP_GUIDE.md](./MONGODB_SETUP_GUIDE.md) for detailed troubleshoot
 
 ### Option A: Using render.yaml (Recommended)
 
-1. Push this repository to GitHub (if not already)
+> **Important:** The `render.yaml` file must exist on the **`master`** branch at the repository root. In the Blueprint setup, set **Branch** to `master` and **Blueprint Path** to `render.yaml`.
+
+1. Push this repository to GitHub (ensure `render.yaml` is on `master`)
 2. Go to [Render Dashboard](https://dashboard.render.com)
 3. Click **New +** → **Blueprint**
 4. Connect your GitHub repo **Rentease_Nepal**

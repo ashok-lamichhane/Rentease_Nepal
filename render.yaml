@@ -1,10 +1,18 @@
+# Render Blueprint for RentEase Nepal backend API
+# Docs: https://render.com/docs/blueprint-spec
+
 services:
   - type: web
     name: rentease-nepal-api
     runtime: node
+    plan: free
+    region: singapore
+    branch: master
     rootDir: server
     buildCommand: npm install
+    preDeployCommand: mkdir -p public/uploads
     startCommand: npm start
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
