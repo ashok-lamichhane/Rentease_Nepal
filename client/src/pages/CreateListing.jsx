@@ -11,7 +11,8 @@ import { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import { getApiUrl } from "../config/api";
 
 const CreateListing = () => {
   const [category, setCategory] = useState("");
@@ -129,7 +130,7 @@ const CreateListing = () => {
       });
 
       /* Send a POST request to server */
-      const response = await fetch("http://localhost:3001/properties/create", {
+      const response = await fetch(getApiUrl("/properties/create"), {
         method: "POST",
         body: listingForm,
       });

@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import "../styles/Navbar.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { setLogout } from "../redux/state";
-import toast from "react-hot-toast";  
+import toast from "react-hot-toast";
+import { getAssetUrl } from "../config/api";
 
 
 const Navbar = () => {
@@ -22,7 +23,7 @@ const Navbar = () => {
 
   const getImageUrl = () => {
     if (user.profileImagePath) {
-      return `http://localhost:3001/${user.profileImagePath.replace("public", "")}`;
+      return getAssetUrl(user.profileImagePath);
     } else if (user.picture) { // For Google sign-in users who might have a 'picture' URL
       return user.picture;
     } else {

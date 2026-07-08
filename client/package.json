@@ -54,5 +54,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "overrides": {
+    "nth-check": "^2.1.1",
+    "postcss": "^8.4.38",
+    "resolve-url-loader": {
+      "postcss": "^8.4.38"
+    },
+    "postcss-svgo": {
+      "svgo": "^3.3.2"
+    },
+    "svgo": {
+      "css-select": {
+        "nth-check": "^2.1.1"
+      }
+    }
   }
 }

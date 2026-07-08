@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
+import { getApiUrl } from "../config/api";
 import toast from 'react-hot-toast';
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -15,7 +15,7 @@ const GoogleSignIn = ({ buttonText }) => {
             console.log("token", tokenResponse);
             try {
                 
-                const res = await fetch("http://localhost:3001/auth/google-signup", {
+                const res = await fetch(getApiUrl("/auth/google-signup"), {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
