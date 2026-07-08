@@ -62,20 +62,20 @@ That guide covers creating a new free Atlas account, cluster, database user, net
 2. Create a **free M0 cluster**
 3. Create a **database user** (save username and password)
 4. **Network Access** → Allow `0.0.0.0/0` (required for Render)
-5. Copy connection string and set database name to `rentease_nepal`:
+5. Copy connection string and set database name to `rentease_admin`:
 
 ```
-mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/rentease_nepal?retryWrites=true&w=majority
+mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/rentease_admin?retryWrites=true&w=majority
 ```
 
 6. Add to `server/.env` (local) and Render Environment (production):
 
 ```env
 MONGO_URL=mongodb+srv://...
-MONGO_DB_NAME=rentease_nepal
+MONGO_DB_NAME=rentease_admin
 ```
 
-7. Test: run `npm run dev` in `server/` — you should see `MongoDB connected: rentease_nepal`
+7. Test: run `npm run dev` in `server/` — you should see `MongoDB connected: rentease_admin`
 
 ### Common fix for broken old database
 
@@ -106,7 +106,7 @@ See [MONGODB_SETUP_GUIDE.md](./MONGODB_SETUP_GUIDE.md) for detailed troubleshoot
    | Variable | Value |
    |----------|-------|
    | `MONGO_URL` | Your MongoDB Atlas connection string |
-   | `MONGO_DB_NAME` | `rentease_nepal` |
+   | `MONGO_DB_NAME` | `rentease_admin` |
    | `JWT_SECRET` | A long random string (e.g. generate with `openssl rand -hex 32`) |
    | `GOOGLE_CLIENT_ID` | Your Google OAuth client ID |
    | `GOOGLE_CLIENT_SECRET` | Your Google OAuth client secret |
@@ -223,8 +223,8 @@ REACT_APP_GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
 ### Backend (`server/.env`)
 
 ```env
-MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net/rentease_nepal?retryWrites=true&w=majority
-MONGO_DB_NAME=rentease_nepal
+MONGO_URL=mongodb+srv://user:pass@cluster.mongodb.net/rentease_admin?retryWrites=true&w=majority
+MONGO_DB_NAME=rentease_admin
 JWT_SECRET=your-secure-random-secret
 GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-client-secret

@@ -26,9 +26,9 @@ MongoDB Atlas is MongoDB’s official cloud hosting service. The **free M0 tier*
 | Item | Example |
 |------|---------|
 | Cloud database | MongoDB Atlas (free) |
-| Database name | `rentease_nepal` |
+| Database name | `rentease_admin` |
 | Collections | `users`, `listings`, `bookings` (created automatically) |
-| Connection string | `mongodb+srv://user:pass@cluster0.xxxxx.mongodb.net/rentease_nepal` |
+| Connection string | `mongodb+srv://user:pass@cluster0.xxxxx.mongodb.net/rentease_admin` |
 
 ---
 
@@ -108,7 +108,7 @@ mongodb+srv://rentease_admin:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=
 7. Add your database name before the `?`:
 
 ```
-mongodb+srv://rentease_admin:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/rentease_nepal?retryWrites=true&w=majority
+mongodb+srv://rentease_admin:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/rentease_admin?retryWrites=true&w=majority
 ```
 
 ### If your password has special characters
@@ -127,7 +127,7 @@ URL-encode these characters in the password:
 **Example:**
 - Password: `MyP@ss#123`
 - Encoded: `MyP%40ss%23123`
-- Full URL: `mongodb+srv://rentease_admin:MyP%40ss%23123@cluster0.xxxxx.mongodb.net/rentease_nepal?retryWrites=true&w=majority`
+- Full URL: `mongodb+srv://rentease_admin:MyP%40ss%23123@cluster0.xxxxx.mongodb.net/rentease_admin?retryWrites=true&w=majority`
 
 ---
 
@@ -145,8 +145,8 @@ cp .env.example .env
 2. Edit `server/.env`:
 
 ```env
-MONGO_URL=mongodb+srv://rentease_admin:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/rentease_nepal?retryWrites=true&w=majority
-MONGO_DB_NAME=rentease_nepal
+MONGO_URL=mongodb+srv://rentease_admin:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/rentease_admin?retryWrites=true&w=majority
+MONGO_DB_NAME=rentease_admin
 JWT_SECRET=your-secure-random-jwt-secret
 GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-google-client-secret
@@ -172,7 +172,7 @@ Paste the output as `JWT_SECRET`.
 | Key | Value |
 |-----|-------|
 | `MONGO_URL` | Your full connection string from Step 5 |
-| `MONGO_DB_NAME` | `rentease_nepal` |
+| `MONGO_DB_NAME` | `rentease_admin` |
 
 5. Click **Save Changes**
 6. Render will redeploy automatically
@@ -191,7 +191,7 @@ npm run dev
 
 **Success:** You should see:
 ```
-MongoDB connected: rentease_nepal
+MongoDB connected: rentease_admin
 Server Port: 3001
 ```
 
@@ -221,7 +221,7 @@ Server Port: 3001
 
 1. Go to MongoDB Atlas → **Database**
 2. Click **Browse Collections** on your cluster
-3. Select database **`rentease_nepal`**
+3. Select database **`rentease_admin`**
 4. You will see collections such as:
    - `users` — registered accounts
    - `listings` — property listings
@@ -289,10 +289,10 @@ Common reasons:
 
 ### Database name: what to use?
 
-This project uses `rentease_nepal` by default. You can change it with the `MONGO_DB_NAME` environment variable.
+This project uses `rentease_admin` by default. You can change it with the `MONGO_DB_NAME` environment variable.
 
-- In connection string: `...mongodb.net/rentease_nepal?retryWrites=...`
-- In `.env`: `MONGO_DB_NAME=rentease_nepal`
+- In connection string: `...mongodb.net/rentease_admin?retryWrites=...`
+- In `.env`: `MONGO_DB_NAME=rentease_admin`
 
 Both should match.
 
@@ -305,7 +305,7 @@ Both should match.
 - [ ] Database user created (username + password saved)
 - [ ] Network Access allows `0.0.0.0/0`
 - [ ] Connection string copied and password replaced
-- [ ] Database name `rentease_nepal` added to connection string
+- [ ] Database name `rentease_admin` added to connection string
 - [ ] `MONGO_URL` set in `server/.env` (local)
 - [ ] `MONGO_URL` set in Render Environment (production)
 - [ ] Backend starts without MongoDB errors
