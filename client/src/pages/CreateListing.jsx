@@ -7,7 +7,7 @@ import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
 import variables from "../styles/variables.scss";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosImages } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BiTrash } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,20 @@ import Footer from "../components/Footer";
 import { getApiUrl } from "../config/api";
 
 const CreateListing = () => {
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth?mode=login");
+      return;
+    }
+    if (user.role !== "host") {
+      toast.error("Create a Property Owner account to list your property.");
+      navigate("/auth?mode=signup");
+    }
+  }, [user, navigate]);
+
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
 
@@ -95,9 +109,7 @@ const CreateListing = () => {
     });
   };
 
-  const creatorId = useSelector((state) => state.user._id);
-
-  const navigate = useNavigate();
+  const creatorId = user?._id;
 
   const handlePost = async (e) => {
     e.preventDefault();

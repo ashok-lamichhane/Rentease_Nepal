@@ -47,7 +47,7 @@ const Listings = () => {
   }, [selectedCategory]);
 
   return (
-    <>
+    <section id="listings" className="listings-section">
       <div className="category-list">
         {categories?.map((category, index) => (
           <div
@@ -96,7 +96,7 @@ const Listings = () => {
           )}
         </div>
       )}
-    </>
+    </section>
   );
 };
 
