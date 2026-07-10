@@ -54,16 +54,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar_right">
-        {!user ? (
-          <div className="navbar_auth-buttons">
-            <Link to="/auth?mode=login" className="navbar_btn navbar_btn--ghost">
-              Log In
-            </Link>
-            <Link to="/auth?mode=signup" className="navbar_btn navbar_btn--primary">
-              Sign Up
-            </Link>
-          </div>
-        ) : (
+        {user && (
           <Link to={isHost ? "/create-listing" : "/"} className="host">
             {isHost ? "List Your Property" : "Find a Stay"}
           </Link>
@@ -93,16 +84,13 @@ const Navbar = () => {
             <Link to="/auth?mode=signup" onClick={() => setDropdownMenu(false)}>
               Sign Up
             </Link>
-            <Link to="/auth?mode=signup" onClick={() => setDropdownMenu(false)}>
-              List Property as Host
-            </Link>
           </div>
         )}
 
         {dropdownMenu && user && (
           <div className="navbar_right_accountmenu">
             <p className="navbar_role-badge">
-              {isHost ? "Host account" : "Renter account"}
+              {isHost ? "Property Owner" : "Renter"}
             </p>
             <Link to={`/${user._id}/trips`} onClick={() => setDropdownMenu(false)}>
               My Trips

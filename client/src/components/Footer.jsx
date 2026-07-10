@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="footer_center">
         <h3>Quick Links</h3>
         <ul>
-          <li><Link to="/auth?mode=signup">Become a Host</Link></li>
+          <li><Link to="/auth?mode=signup">Become a Property Owner</Link></li>
           <li><Link to="/auth?mode=login">Renter Login</Link></li>
           <li><Link to="/">Browse Stays</Link></li>
         </ul>

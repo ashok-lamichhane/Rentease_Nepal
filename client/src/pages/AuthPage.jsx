@@ -13,7 +13,7 @@ const AuthPage = () => {
   const [searchParams] = useSearchParams();
   const initialMode = searchParams.get("mode") === "signup" ? "signup" : "login";
 
-  const [step, setStep] = useState("entry");
+  const [step, setStep] = useState("role");
   const [mode, setMode] = useState(initialMode);
   const [role, setRole] = useState("");
   const [formData, setFormData] = useState({
@@ -64,7 +64,7 @@ const AuthPage = () => {
       if (response.status === 200) {
         const loggedIn = await response.json();
         dispatch(setLogin({ user: loggedIn.user, token: loggedIn.token }));
-        toast.success(`Welcome back!`);
+        toast.success("Welcome back!");
         redirectAfterAuth(loggedIn.user);
         return;
       }
@@ -132,11 +132,6 @@ const AuthPage = () => {
     onError: () => toast.error("Google sign-in cancelled"),
   });
 
-  const startFlow = (selectedMode) => {
-    setMode(selectedMode);
-    setStep("role");
-  };
-
   const selectRole = (selectedRole) => {
     setRole(selectedRole);
     setStep("form");
@@ -152,24 +147,6 @@ const AuthPage = () => {
           <img src="/assets/logo.png" alt={`${site.name} logo`} />
           <span>{site.name}</span>
         </Link>
-
-        {step === "entry" && (
-          <div className="auth-card">
-            <h1>Welcome to {site.name}</h1>
-            <p>{site.description}</p>
-            <div className="auth-card_actions">
-              <button type="button" onClick={() => startFlow("login")}>
-                Log In
-              </button>
-              <button type="button" className="secondary" onClick={() => startFlow("signup")}>
-                Sign Up
-              </button>
-            </div>
-            <Link to="/" className="auth-card_back">
-              ← Back to homepage
-            </Link>
-          </div>
-        )}
 
         {step === "role" && (
           <div className="auth-card">
@@ -189,9 +166,9 @@ const AuthPage = () => {
                 </button>
               ))}
             </div>
-            <button type="button" className="auth-card_back-btn" onClick={() => setStep("entry")}>
-              ← Back
-            </button>
+            <Link to="/" className="auth-card_back">
+              ← Back to homepage
+            </Link>
           </div>
         )}
 
@@ -302,7 +279,7 @@ const AuthPage = () => {
             </button>
             <p className="auth-switch">
               Already have an account?{" "}
-              <button type="button" onClick={() => { setMode("login"); setStep("form"); }}>
+              <button type="button" onClick={() => { setMode("login"); setStep("role"); }}>
                 Log in
               </button>
             </p>

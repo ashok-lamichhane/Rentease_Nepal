@@ -24,7 +24,7 @@ const CreateListing = () => {
       return;
     }
     if (user.role !== "host") {
-      toast.error("Create a host account to list your property.");
+      toast.error("Create a Property Owner account to list your property.");
       navigate("/auth?mode=signup");
     }
   }, [user, navigate]);

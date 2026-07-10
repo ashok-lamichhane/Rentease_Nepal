@@ -4,7 +4,7 @@ import "../styles/HowItWorks.scss";
 
 const steps = [
   {
-    title: "For Renters & Learners",
+    title: "For Renters",
     image: images.homestay,
     points: [
       "Search rooms, homestays, hotels and guest houses",

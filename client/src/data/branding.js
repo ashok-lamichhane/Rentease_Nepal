@@ -20,13 +20,13 @@ export const contact = {
 export const roles = {
   renter: {
     id: "renter",
-    title: "Renter / Learner",
-    subtitle: "Find rooms, homestays, hotels & guest houses across Nepal",
+    title: "Renter",
+    subtitle: "Find rooms, homestays, hotels and guest houses across Nepal",
     icon: "🏠",
   },
   host: {
     id: "host",
-    title: "Host / Property Owner",
+    title: "Property Owner",
     subtitle: "List your home, hotel, guest house or spare rooms for rent",
     icon: "🏨",
   },
