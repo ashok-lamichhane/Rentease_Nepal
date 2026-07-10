@@ -9,9 +9,19 @@ const listingRoutes = require("./routes/listing.js");
 const bookingRoutes = require("./routes/booking.js");
 const userRoutes = require("./routes/user.js");
 
+const defaultOrigins = [
+  "http://localhost:3000",
+  "https://rentease-nepal.vercel.app",
+];
+
 const allowedOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(",").map((origin) => origin.trim())
-  : ["http://localhost:3000"];
+  ? [
+      ...new Set([
+        ...defaultOrigins,
+        ...process.env.CLIENT_URL.split(",").map((origin) => origin.trim()),
+      ]),
+    ]
+  : defaultOrigins;
 
 app.use(
   cors({
@@ -19,6 +29,7 @@ app.use(
     credentials: true,
   })
 );
+app.options("*", cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 app.use(express.static("public"));
 

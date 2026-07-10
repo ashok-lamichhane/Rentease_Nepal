@@ -16,6 +16,8 @@ const Listings = () => {
   const listings = useSelector((state) => state.listings);
 
   const getFeedListings = async () => {
+    setLoading(true);
+
     try {
       const response = await fetch(
         selectedCategory !== "All"
@@ -26,11 +28,17 @@ const Listings = () => {
         }
       );
 
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
       const data = await response.json();
       dispatch(setListings({ listings: data }));
-      setLoading(false);
     } catch (err) {
       console.log("Fetch Listings Failed", err.message);
+      dispatch(setListings({ listings: [] }));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,6 +63,8 @@ const Listings = () => {
 
       {loading ? (
         <Loader />
+      ) : listings.length === 0 ? (
+        <p className="listings-empty">No listings available right now.</p>
       ) : (
         <div className="listings">
           {listings.map(
