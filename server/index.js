@@ -41,7 +41,7 @@ app.get("/health", async (_req, res) => {
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 3001;
-const DB_NAME = process.env.MONGO_DB_NAME || "rentease_admin";
+const DB_NAME = process.env.MONGO_DB_NAME || "rentease_nepal";
 
 if (!process.env.MONGO_URL) {
   console.error("MONGO_URL is not set. Add it to server/.env or Render environment variables.");

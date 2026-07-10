@@ -18,7 +18,7 @@ services:
       - key: MONGO_URL
         value: mongodb+srv://rentease_admin:jeJwsMTWpcEM5eGx@cluster0.iwgxscu.mongodb.net/rentease_admin?appName=Cluster0
       - key: MONGO_DB_NAME
-        value: rentease_admin
+        value: rentease_nepal
       - key: JWT_SECRET
         value: KwjHI7UedIdcM8BYeLosXKIQxEzUNzhk
       - key: GOOGLE_CLIENT_ID
