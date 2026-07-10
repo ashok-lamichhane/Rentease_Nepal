@@ -9,22 +9,21 @@ services:
     region: singapore
     branch: master
     rootDir: server
-    buildCommand: npm install
-    preDeployCommand: mkdir -p public/uploads
+    buildCommand: npm install && mkdir -p public/uploads
     startCommand: npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
       - key: MONGO_URL
-        sync: false
+        value: mongodb+srv://rentease_admin:jeJwsMTWpcEM5eGx@cluster0.iwgxscu.mongodb.net/rentease_admin?appName=Cluster0
       - key: MONGO_DB_NAME
         value: rentease_admin
       - key: JWT_SECRET
-        sync: false
+        value: KwjHI7UedIdcM8BYeLosXKIQxEzUNzhk
       - key: GOOGLE_CLIENT_ID
-        sync: false
+        value: 963679257311-ek9ereusnmh5m413mi5dek7ka93fu3ab.apps.googleusercontent.com
       - key: GOOGLE_CLIENT_SECRET
-        sync: false
+        value: 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
       - key: CLIENT_URL
-        sync: false
+        value: http://localhost:3000
