@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -25,15 +25,41 @@ const AuthPage = () => {
     profileImage: null,
   });
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const [profilePreview, setProfilePreview] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user) {
+      navigate(user.role === "host" ? "/create-listing" : "/", { replace: true });
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    return () => {
+      if (profilePreview) {
+        URL.revokeObjectURL(profilePreview);
+      }
+    };
+  }, [profilePreview]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
+
+    if (name === "profileImage" && files?.[0]) {
+      setProfilePreview((prev) => {
+        if (prev) URL.revokeObjectURL(prev);
+        return URL.createObjectURL(files[0]);
+      });
+      setFormData((prev) => ({ ...prev, profileImage: files[0] }));
+      return;
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "profileImage" ? files[0] : value,
+      [name]: value,
     }));
 
     if (name === "password" || name === "confirmPassword") {
@@ -260,7 +286,7 @@ const AuthPage = () => {
                 required
               />
               {!passwordMatch && <p className="auth-error">Passwords do not match</p>}
-              <label className="auth-upload">
+              <label className={`auth-upload${profilePreview ? " auth-upload--has-preview" : ""}`}>
                 <input
                   type="file"
                   name="profileImage"
@@ -268,7 +294,18 @@ const AuthPage = () => {
                   onChange={handleChange}
                   required
                 />
-                Upload profile photo
+                {profilePreview ? (
+                  <div className="auth-upload_preview">
+                    <img src={profilePreview} alt="Profile preview" />
+                    <span>Change photo</span>
+                  </div>
+                ) : (
+                  <div className="auth-upload_placeholder">
+                    <span className="auth-upload_icon">📷</span>
+                    <span>Upload profile photo</span>
+                    <small>JPG or PNG, up to 5 MB</small>
+                  </div>
+                )}
               </label>
               <button type="submit" disabled={!passwordMatch}>
                 Sign Up

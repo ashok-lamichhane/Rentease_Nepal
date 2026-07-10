@@ -1,9 +1,33 @@
 import "../styles/Footer.scss";
-import { LocalPhone, Email } from "@mui/icons-material";
+import { LocalPhone, Email, OpenInNew } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { contact, site } from "../data/branding";
 
 const Footer = () => {
+  const user = useSelector((state) => state.user);
+
+  const guestLinks = [
+    { label: "Become a Property Owner", to: "/auth?mode=signup" },
+    { label: "Renter Login", to: "/auth?mode=login" },
+    {
+      label: "Contact Product Owner",
+      href: contact.productOwnerUrl,
+      external: true,
+    },
+  ];
+
+  const loggedInLinks = [
+    { label: "Browse Stays", to: "/#listings" },
+    {
+      label: "Contact Product Owner",
+      href: contact.productOwnerUrl,
+      external: true,
+    },
+  ];
+
+  const quickLinks = user ? loggedInLinks : guestLinks;
+
   return (
     <footer className="footer">
       <div className="footer_left">
@@ -16,9 +40,18 @@ const Footer = () => {
       <div className="footer_center">
         <h3>Quick Links</h3>
         <ul>
-          <li><Link to="/auth?mode=signup">Become a Property Owner</Link></li>
-          <li><Link to="/auth?mode=login">Renter Login</Link></li>
-          <li><Link to="/">Browse Stays</Link></li>
+          {quickLinks.map((link) => (
+            <li key={link.label}>
+              {link.external ? (
+                <a href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                  <OpenInNew className="footer_external-icon" />
+                </a>
+              ) : (
+                <Link to={link.to}>{link.label}</Link>
+              )}
+            </li>
+          ))}
         </ul>
       </div>
 

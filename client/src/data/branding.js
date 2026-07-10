@@ -15,6 +15,7 @@ export const images = {
 export const contact = {
   phone: "+977 9808666721",
   email: "info@ashoklamichhane.com.np",
+  productOwnerUrl: "https://ashoklamichhane.com.np/",
 };
 
 export const roles = {

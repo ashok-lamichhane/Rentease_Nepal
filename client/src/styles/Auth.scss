@@ -209,9 +209,59 @@
   cursor: pointer;
   color: $blue;
   font-weight: 600;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: $pinkred;
+    background: rgba(248, 57, 90, 0.04);
+  }
+
+  &--has-preview {
+    border-style: solid;
+    border-color: rgba(36, 53, 90, 0.2);
+    padding: 12px;
+  }
 
   input {
     display: none;
+  }
+
+  &_placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    small {
+      font-weight: 400;
+      color: $darkgrey;
+      font-size: 0.8rem;
+    }
+  }
+
+  &_icon {
+    font-size: 1.6rem;
+  }
+
+  &_preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid $pinkred;
+      box-shadow: 0 4px 16px rgba(248, 57, 90, 0.25);
+    }
+
+    span {
+      font-size: 0.9rem;
+      color: $pinkred;
+    }
   }
 }
 

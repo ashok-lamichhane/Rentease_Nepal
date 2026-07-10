@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { images, site } from "../data/branding";
 import "../styles/HowItWorks.scss";
 
@@ -28,6 +29,12 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const user = useSelector((state) => state.user);
+
+  if (user) {
+    return null;
+  }
+
   return (
     <section className="how-it-works">
       <div className="how-it-works_header">

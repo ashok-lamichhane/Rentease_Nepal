@@ -65,11 +65,13 @@
     &--primary {
       background: $pinkred;
       color: white;
+      box-shadow: 0 8px 24px rgba(248, 57, 90, 0.35);
     }
 
     &--ghost {
       border: 2px solid white;
       color: white;
+      backdrop-filter: blur(4px);
     }
 
     &:hover {

@@ -46,21 +46,33 @@
   &_center {
     text-decoration: none;
 
+    h3 {
+      color: $blue;
+      margin-bottom: 4px;
+    }
+
     ul {
       list-style: none;
-      margin-top: 20px;
-      cursor: pointer;
+      margin-top: 16px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-      li:hover {
-        color: $pinkred
-      }
+      li {
+        a {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          text-decoration: none;
+          color: $darkgrey;
+          font-weight: 600;
+          padding: 6px 0;
+          transition: color 0.2s ease;
 
-      a {
-        text-decoration: none;
-        color: black;
-
-        &:hover {
-          color: $pinkred;
+          &:hover {
+            color: $pinkred;
+          }
         }
       }
     }
@@ -68,6 +80,11 @@
     @include md {
       display: none;
     }
+  }
+
+  &_external-icon {
+    font-size: 0.85rem !important;
+    opacity: 0.7;
   }
 
   &_right {
