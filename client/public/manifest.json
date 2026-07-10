@@ -1,7 +1,13 @@
 {
-  "short_name": "RentEase Nepal",
   "name": "RentEase Nepal",
-  "icons": [],
+  "short_name": "RentEase",
+  "icons": [
+    {
+      "src": "/assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

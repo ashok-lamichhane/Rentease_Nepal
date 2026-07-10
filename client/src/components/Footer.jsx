@@ -1,18 +1,24 @@
-import "../styles/Footer.scss"
-import { LocationOn, LocalPhone, Email } from "@mui/icons-material"
+import "../styles/Footer.scss";
+import { LocalPhone, Email } from "@mui/icons-material";
+import { Link } from "react-router-dom";
+import { contact, site } from "../data/branding";
+
 const Footer = () => {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="footer_left">
-        <a href="/"><img src="/assets/logo.png" alt="logo" /></a>
+        <Link to="/">
+          <img src="/assets/logo.png" alt={`${site.name} logo`} />
+        </Link>
+        <p>{site.tagline}</p>
       </div>
 
       <div className="footer_center">
-        <h3>Useful Links</h3>
+        <h3>Quick Links</h3>
         <ul>
-          <li>About Us</li>
-          <li>Terms and Conditions</li>
-          <li>Return and Refund Policy</li>
+          <li><Link to="/auth?mode=signup">Become a Host</Link></li>
+          <li><Link to="/auth?mode=login">Renter Login</Link></li>
+          <li><Link to="/">Browse Stays</Link></li>
         </ul>
       </div>
 
@@ -20,16 +26,16 @@ const Footer = () => {
         <h3>Contact</h3>
         <div className="footer_right_info">
           <LocalPhone />
-          <p>+880 1321205457</p>
+          <a href={`tel:${contact.phone.replace(/\s/g, "")}`}>{contact.phone}</a>
         </div>
         <div className="footer_right_info">
           <Email />
-          <p>renteasenepal@support.com</p>
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
         </div>
-        <img src="/assets/payment.png" alt = "payment" />
+        <p className="footer_credit">Open-source Nepal imagery via Unsplash</p>
       </div>
-    </div>
-  )
-}
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

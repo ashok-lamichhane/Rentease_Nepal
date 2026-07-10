@@ -79,15 +79,30 @@
 
     &_info {
       display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
 
-      p {
-        margin-left: 20px;
-        margin-bottom: 15px;
+      a {
+        color: $blue;
+        text-decoration: none;
+        font-weight: 600;
+
+        &:hover {
+          color: $pinkred;
+        }
       }
     }
+  }
 
-    @include sm {
-      display: none;
-    }
+  &_credit {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: $darkgrey;
+  }
+
+  &_left p {
+    color: $darkgrey;
+    line-height: 1.5;
   }
 }

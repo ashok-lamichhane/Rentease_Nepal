@@ -13,8 +13,64 @@
   }
 
   img {
-    width: 100px;
+    width: 48px;
+    height: 48px;
     cursor: pointer;
+    border-radius: 10px;
+  }
+
+  &_brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: $blue;
+
+    span {
+      font-weight: 800;
+      font-size: 1.1rem;
+
+      @include sm {
+        display: none;
+      }
+    }
+  }
+
+  &_auth-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    @include sm {
+      display: none;
+    }
+  }
+
+  &_btn {
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+
+    &--ghost {
+      color: $blue;
+      border: 2px solid $blue;
+    }
+
+    &--primary {
+      background: $pinkred;
+      color: white;
+    }
+  }
+
+  &_role-badge {
+    padding: 8px 15px;
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: $pinkred;
+    border-bottom: 1px solid $lightgrey;
   }
 
   &_search {

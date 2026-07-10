@@ -22,7 +22,7 @@ const upload = multer({ storage });
 router.post("/register", upload.single("profileImage"), async (req, res) => {
   try {
     /* Take all information from the form */
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, role = "renter" } = req.body;
 
     /* The uploaded file is available as req.file */
     const profileImage = req.file;
@@ -51,6 +51,7 @@ router.post("/register", upload.single("profileImage"), async (req, res) => {
       email,
       password: hashedPassword,
       profileImagePath,
+      role: role === "host" ? "host" : "renter",
     });
 
     /* Save the new User */
@@ -105,7 +106,7 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 router.post("/google-signup", async (req, res) => {
   try {
-    const { token } = req.body;
+    const { token, role = "renter" } = req.body;
     
     // Get user info from Google
     const ticket = await client.getTokenInfo(token);
@@ -125,7 +126,8 @@ router.post("/google-signup", async (req, res) => {
     // Create new user
     const newUser = new User({
       email,
-      provider: 'google'
+      provider: "google",
+      role: role === "host" ? "host" : "renter",
     });
     
     await newUser.save();
